@@ -82,5 +82,6 @@ contacts = read_phonebook(conn)
 # update(conn,("Beka","+77011234567", "user1"))
 # terminal  = tuple(input("username, first_name, phonenumber: ").split())
 # insert_terminal(conn, terminal)
+# """"""""""""""""""""""""""
 read_contacts(conn,("5","10"))
 conn.close()
