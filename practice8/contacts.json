@@ -1,0 +1,5 @@
+[
+    {"username": "user1", "first_name": "Alice", "phone_number": "+77012345678"},
+    {"username": "user2", "first_name": "Bob", "phone_number": "12345"},
+    {"username": "user3", "first_name": "Charlie", "phone_number": "+77098765432"}
+]
