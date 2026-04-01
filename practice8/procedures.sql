@@ -15,10 +15,26 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE PROCEDURE delete_contact(
-    p_username VARCHAR
+    p_username VARCHAR DEFAULT NULL,
+    p_phone    VARCHAR DEFAULT NULL
 ) AS $$
 BEGIN
-    DELETE FROM phonebook WHERE username = p_username;
+    IF p_username IS NOT NULL AND p_phone IS NOT NULL THEN
+        DELETE FROM phonebook
+        WHERE username = p_username
+          AND phone_number = p_phone;
+
+    ELSIF p_username IS NOT NULL THEN
+        DELETE FROM phonebook
+        WHERE username = p_username;
+
+    ELSIF p_phone IS NOT NULL THEN
+        DELETE FROM phonebook
+        WHERE phone_number = p_phone;
+
+    ELSE
+        RAISE EXCEPTION 'At least one parameter (username or phone) must be provided.';
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
 
