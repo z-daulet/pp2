@@ -1,16 +1,16 @@
 [
     {
-        "name": "ss",
+        "name": "Michael Shummaher",
         "score": 2246,
         "distance": 320
     },
     {
-        "name": "homelander",
+        "name": "Hernando Alonso",
         "score": 1798,
         "distance": 276
     },
     {
-        "name": " \u0430\\",
+        "name": "GG",
         "score": 1425,
         "distance": 718
     },
@@ -18,6 +18,11 @@
         "name": "Speedster",
         "score": 1250,
         "distance": 450
+    },
+    {
+        "name": "G/*\\",
+        "score": 1051,
+        "distance": 541
     },
     {
         "name": "Verstapen",
@@ -43,10 +48,5 @@
         "name": "ss",
         "score": 604,
         "distance": 101
-    },
-    {
-        "name": "pp",
-        "score": 543,
-        "distance": 183
     }
 ]

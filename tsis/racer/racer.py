@@ -44,7 +44,17 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
         self.image = load_image("enemy.png", 40, 70)
         self.rect = self.image.get_rect(center=(random.choice(LANES), -100))
-        self.speed = SPEED_BASE + (2 if difficulty == "hard" else 0)
+        
+        # Base speed with difficulty multiplier
+        base_speed = SPEED_BASE + 2
+        if difficulty == "easy":
+            self.speed = int(base_speed * 0.8)
+        elif difficulty == "normal":
+            self.speed = base_speed
+        elif difficulty == "hard":
+            self.speed = int(base_speed * 1.3)
+        else:
+            self.speed = base_speed
 
     def update(self):
         self.rect.y += self.speed
@@ -54,7 +64,18 @@ class Enemy(pygame.sprite.Sprite):
 class Obstacle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = load_image("obstacle.png", 40, 40)
+        self.type = random.choice(["barrier", "oil_slick", "pothole", "speed_bump"])
+        if self.type == "barrier":
+            self.image = load_image("obstacle.png", 40, 40)
+        elif self.type == "oil_slick":
+            self.image = load_image("obstacle.png", 60, 20)  # Wider, flatter
+            self.image.fill((0, 0, 100, 128))  # Dark blue tint
+        elif self.type == "pothole":
+            self.image = load_image("obstacle.png", 30, 30)
+            self.image.fill((50, 50, 50, 128))  # Dark gray
+        elif self.type == "speed_bump":
+            self.image = load_image("obstacle.png", 80, 15)  # Long, thin
+            self.image.fill((150, 150, 150, 128))  # Light gray
         self.rect = self.image.get_rect(center=(random.choice(LANES), -50))
 
     def update(self):
@@ -69,6 +90,30 @@ class PowerUp(pygame.sprite.Sprite):
         img_name = self.type.lower() + ".png"
         self.image = load_image(img_name, 30, 30)
         self.rect = self.image.get_rect(center=(random.choice(LANES), -50))
+
+    def update(self):
+        self.rect.y += SPEED_BASE
+        if self.rect.top > 600:
+            self.kill()
+
+class Coin(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = load_image("Coin.png", 25, 25)
+        self.rect = self.image.get_rect(center=(random.choice(LANES), -50))
+        self.value = 10
+
+    def update(self):
+        self.rect.y += SPEED_BASE
+        if self.rect.top > 600:
+            self.kill()
+
+class NitroStrip(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((300, 30))  # Wide strip across road
+        self.image.fill((255, 165, 0))  # Orange color
+        self.rect = self.image.get_rect(center=(300, -50))
 
     def update(self):
         self.rect.y += SPEED_BASE
